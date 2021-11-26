@@ -56,7 +56,7 @@ namespace MiniProjectTwo.Model
         public static async void Create(Product product)
         {
             string categoryName = product.Category.Name;
-            string OfficeName = product.Category.Name;
+            string OfficeName = product.Office.Name;
 
             using var context = new AppDbContext();
             product.Category = await NewOrFirstCategory(context, categoryName);
@@ -65,7 +65,7 @@ namespace MiniProjectTwo.Model
             context.Products.Add(product);
             context.SaveChanges();
         }
-        
+
         public static async void Update(Product product)
         {
             using var context = new AppDbContext();
@@ -101,9 +101,9 @@ namespace MiniProjectTwo.Model
         {
             return (await context.Categories.FirstOrDefaultAsync(x => x.Name == catName)) ?? new Category(catName);
         }
-        static async Task<Office> NewOrFirstOffice(AppDbContext context, string catName)
+        static async Task<Office> NewOrFirstOffice(AppDbContext context, string office)
         {
-            return (await context.Offices.FirstOrDefaultAsync(x => x.Name == catName)) ?? new Office(catName);
+            return (await context.Offices.FirstOrDefaultAsync(x => x.Name == office)) ?? new Office(office);
         }
 
         public (string price, DateTime latestUpdate) CurrencyConvert()
@@ -113,11 +113,14 @@ namespace MiniProjectTwo.Model
             string price;
             switch (Office.Name)
             {
-                case "Malmö": price = (Price * SEK).ToString("0.## Kr");
+                case "Malmö":
+                    price = (Price * SEK).ToString("0.## Kr");
                     break;
-                case "Kuala Lumpur": price = (Price * MYR).ToString("RM0.##");
+                case "Kuala Lumpur":
+                    price = (Price * MYR).ToString("RM0.##");
                     break;
-                default: price = Price.ToString("$0.##");
+                default:
+                    price = Price.ToString("$0.##");
                     break;
             }
 

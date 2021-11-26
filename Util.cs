@@ -1,12 +1,10 @@
 ﻿using MiniProjectTwo.Utilities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace MiniProjectTwo
 {
     class Util
-    {   
+    {
         public static void PrintTxt(string txt, string color = "White")
         {
             Console.ForegroundColor = (ConsoleColor)Enum.Parse(typeof(ConsoleColor), color, true);
@@ -27,6 +25,5 @@ namespace MiniProjectTwo
             Console.ReadKey(true);
             Environment.Exit(0);
         }
-
     }
 }

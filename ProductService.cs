@@ -26,7 +26,6 @@ namespace MiniProjectTwo
 
             if (productList.Count > 0)
             {
-
                 // Create a table
                 var table = new Table()
                     .BorderColor(Color.Grey)
@@ -53,17 +52,14 @@ namespace MiniProjectTwo
                 // Render the table to the console
                 AnsiConsole.Write(table);
                 Util.PrintTxt($"Exchange Rates Updated: {productList[0].CurrencyConvert().latestUpdate} | Total Products: {productList.Count} \n\n", "DarkGray");
-
             }
             else
             {
                 Util.PrintTxt("\n\n\t\tNO PRODUCT FOUND!\n\n", "Red");
-                Util.PrintTxt("\t\tPress 'D' to add demo data.\n\n", "Yellow");
+                Util.PrintTxt("\t\tPress 'N' to add sample data.\n\n", "Yellow");
             }
-
-            //Util.PrintTxt($"Press 'Enter' to add new product.", "DarkGray");
         }
-        
+
         public static void AddProudct(int id = -1)
         {
             string[] categories = Category.GetAll().Select(x => x.Name.ToString()).ToArray();
@@ -110,7 +106,7 @@ namespace MiniProjectTwo
                 date
             );
 
-            if(id > 0)
+            if (id > 0)
             {
                 product.Id = id;
                 Product.Update(product);
@@ -119,7 +115,7 @@ namespace MiniProjectTwo
             {
                 Product.Create(product);
             }
-            
+
             AnsiConsole.Status()
                 .Spinner(Spinner.Known.Aesthetic)
                 .SpinnerStyle(Style.Parse("green bold"))
@@ -137,9 +133,7 @@ namespace MiniProjectTwo
 
         public static void DemoData()
         {
-
-            List<Product> list = Product.GetAll();
-            bool productExist = !list.Any(p => p.Model == "Thinkpad P1" && p.Brand == "Lenovo");
+            bool productExist = DemoDataExist();
             if (productExist)
             {
                 DateTime now = DateTime.Now;
@@ -160,6 +154,12 @@ namespace MiniProjectTwo
             {
                 Util.PrintTxt("\n\tDemo Data Alreay Added.\n", "Red");
             }
+        }
+
+        public static bool DemoDataExist()
+        {
+            List<Product> list = Product.GetAll();
+            return !list.Any(p => p.Model == "Thinkpad P1" && p.Brand == "Lenovo" && p.Price == 3750.90m && p.Category.Name == "Laptop" && p.Office.Name == "Kuala Lumpur");
         }
 
         public static void CreateCategoriesOffices()

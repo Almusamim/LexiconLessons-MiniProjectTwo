@@ -2,16 +2,17 @@
 using MiniProjectTwo.Utilities;
 using Spectre.Console;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-
-
 
 namespace MiniProjectTwo
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            RunApp();
+        }
+
+        private static void RunApp()
         {
             ProductService.CreateCategoriesOffices();
 
@@ -25,7 +26,7 @@ namespace MiniProjectTwo
                 cki = Console.ReadKey(false);
                 Util.ClearConsole();
 
-                // add product to the list with validations
+                // add product form
                 if (cki.Key == ConsoleKey.C || cki.Key == ConsoleKey.Add)
                 {
                     AddProductPage();
@@ -55,8 +56,8 @@ namespace MiniProjectTwo
                     SearchPage();
                 }
 
-                // Dump demo/sample data to the product list
-                if (cki.Key == ConsoleKey.Print && cki.Key == ConsoleKey.N)
+                //Add sample data to the products
+                if (cki.Key == ConsoleKey.Print || cki.Key == ConsoleKey.N)
                 {
                     ProductService.DemoData();
                 }
