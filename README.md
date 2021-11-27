@@ -3,9 +3,6 @@
 
 ![Screenshot](https://i.imgur.com/qo4mpiW.gif)
 =======
-# MiniProjectTwo `CRUD`
-
-![](https://i.imgur.com/qo4mpiW.gif)
 
 
 
