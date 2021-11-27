@@ -96,7 +96,7 @@ namespace MiniProjectTwo.Model
             context.SaveChanges();
         }
 
-        // To prevent category duplications in the database
+        // To prevent categories & offices duplications in the database
         static async Task<Category> NewOrFirstCategory(AppDbContext context, string catName)
         {
             return (await context.Categories.FirstOrDefaultAsync(x => x.Name == catName)) ?? new Category(catName);
@@ -108,7 +108,7 @@ namespace MiniProjectTwo.Model
 
         public (string price, DateTime latestUpdate) CurrencyConvert()
         {
-            var (MYR, SEK, latestUpdate) = Client.Rates();
+            var (MYR, SEK, latestUpdate) = ExchangeRate.Rates();
 
             string price;
             switch (Office.Name)

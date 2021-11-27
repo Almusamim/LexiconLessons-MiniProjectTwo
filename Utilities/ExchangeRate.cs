@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MiniProjectTwo
 {
-    class Client
+    class ExchangeRate
     {
         public static (decimal MYR, decimal SEK, DateTime latestUpdate) Rates()
         {

@@ -4,7 +4,6 @@ namespace MiniProjectTwo.Utilities
 {
     class Misc
     {
-
         //JUST FOR FUN, LESSON 2
         public static void LexiconHeader(string color = "Red", string secondColor = "Gray")
         {
