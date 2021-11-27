@@ -8,25 +8,36 @@ namespace MiniProjectTwo.Utilities
         public static void Run()
         {
             Console.WriteLine();
-
             AnsiConsole.Markup(" [bold steelblue1_1]Press Key For:[/]  ");
-            AnsiConsole.Markup("'[slowblink bold green1]C[/]' [italic]Create[/]  ");
-            AnsiConsole.Markup("'[slowblink bold cyan1]R[/]' [italic]Read[/]  ");
-            AnsiConsole.Markup("'[slowblink bold greenyellow]U[/]' [italic]Update[/]  ");
-            AnsiConsole.Markup("'[slowblink bold red]D[/]' [italic]Delete[/]");
+
+            List("C", "Create", "green1");
+            List("R", "Create", "cyan1");
+            List("U", "Update", "greenyellow");
+            List("D", "Delete", "red");
+
             Console.WriteLine("\n");
 
-
-            AnsiConsole.Markup(" '[slowblink bold orchid1]S[/]' [italic orchid1]Search Product[/]  ");
-            bool sampleDataExist = ProductService.DemoDataExist();
+            List("S", "Search Product", "orchid1", "orchid1");
+            bool sampleDataExist = Util.DemoDataExist();
             if (sampleDataExist)
             {
-                AnsiConsole.Markup("'[slowblink bold hotpink3]N[/]' [italic hotpink3]Add Sample Data[/]");
+                List("N", "Add Sample Data", "hotpink3", "hotpink3");
             }
 
-            AnsiConsole.Markup("[grey] || [/]");
-            AnsiConsole.Markup("'[slowblink bold red]Esc[/]' [italic red]Delete[/]");
+            AnsiConsole.Markup("[grey]|| [/]");
+            List("Esc", "Delete", "red", "red");
             Console.WriteLine("\n");
+        }
+
+        private static void List(string key, string name, string keyColor = "white", string fontColor = "white")
+        {
+            AnsiConsole.Markup
+            (
+                $"[{fontColor}]" +
+                $"'[slowblink bold {keyColor}]{key}[/]' " +
+                $"[italic]{name}[/]" +
+                $"[/]  "
+            );
         }
     }
 }
