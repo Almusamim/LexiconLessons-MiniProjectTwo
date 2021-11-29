@@ -1,7 +1,7 @@
 
 # MiniProjectTwo `CRUD`
 
-![Screenshot](https://i.imgur.com/qo4mpiW.gif)
+![Screenshot](https://i.imgur.com/Dii0oyL.gif)
 =======
 
 
