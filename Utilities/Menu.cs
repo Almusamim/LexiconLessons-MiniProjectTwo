@@ -25,7 +25,7 @@ namespace MiniProjectTwo.Utilities
             }
 
             AnsiConsole.Markup("[grey]|| [/]");
-            List("Esc", "Delete", "red", "red");
+            List("Esc", "Exist", "red", "red");
             Console.WriteLine("\n");
         }
 
