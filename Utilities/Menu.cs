@@ -11,7 +11,7 @@ namespace MiniProjectTwo.Utilities
             AnsiConsole.Markup(" [bold steelblue1_1]Press Key For:[/]  ");
 
             List("C", "Create", "green1");
-            List("R", "Create", "cyan1");
+            List("R", "Read", "cyan1");
             List("U", "Update", "greenyellow");
             List("D", "Delete", "red");
 
