@@ -12,7 +12,7 @@ namespace MiniProjectTwo.Views
             int UpdateProductId = AnsiConsole.Ask<int>("\n[green]Choose an product ID to update:[/]");
 
             Console.Clear();
-            CreateOrUpdateProductForm.Run(UpdateProductId);
+            CreateOrUpdateProductForm.Run(true, UpdateProductId);
 
             Util.ClearConsole();
 

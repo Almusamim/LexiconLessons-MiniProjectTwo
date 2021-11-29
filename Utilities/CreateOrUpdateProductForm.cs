@@ -8,36 +8,57 @@ namespace MiniProjectTwo.Utilities
 {
     class CreateOrUpdateProductForm
     {
-        public static void Run(int id = -1)
+        public static void Run(bool update = false, int id = -1)
         {
-            string[] categories = Category.GetAll().Select(x => x.Name.ToString()).ToArray();
-            string[] offices = Office.GetAll().Select(x => x.Name.ToString()).ToArray();
-
-            string category = SelectOption(categories, "category");
-            string office = SelectOption(offices, "Office Locations");
-            var brand = GetValue<string>("Brand name: ");
-            var model = GetValue<string>("Model name: ");
-            var price = GetValue<decimal>("Product price: ");
-            var purchaseDate = GetValue<DateTime>("Purchase Date: ");
-
-            Product product = new(
-                new Category(category),
-                new Office(office),
-                brand, model, price, purchaseDate
-            );
-
-            // if ID param exist update else create new product
-            if (id > 0)
+            bool productExist = ProductExist(id);
+            if(update && !productExist)
             {
-                product.Id = id;
-                Product.Update(product);
+                AnsiConsole.Markup($"[bold red]Product with ID # {id}, Doesn't exist.[/]");
+                Thread.Sleep(1450);
             }
             else
             {
-                Product.Create(product);
+                string[] categories = Category.GetAll().Select(x => x.Name.ToString()).ToArray();
+                string[] offices = Office.GetAll().Select(x => x.Name.ToString()).ToArray();
+
+                string category = SelectOption(categories, "category");
+                string office = SelectOption(offices, "office location");
+                var brand = GetValue<string>("Brand name: ");
+                var model = GetValue<string>("Model name: ");
+                var price = GetValue<decimal>("Product price: ");
+                var purchaseDate = GetValue<DateTime>("Purchase Date: ");
+
+                Product product = new(
+                    new Category(category),
+                    new Office(office),
+                    brand, model, price, purchaseDate
+                );
+
+                // if ID param exist update else create new product
+                if (productExist)
+                {
+                    product.Id = id;
+                    Product.Update(product);
+                }
+                else
+                {
+                    Product.Create(product);
+                }
+
+                Loader();
             }
 
-            Loader();
+        }
+
+        private static bool ProductExist(int id)
+        {
+            var product = Product.GetSingle(id);
+            if (product is not null && id > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         private static T GetValue<T>(string prompt)
